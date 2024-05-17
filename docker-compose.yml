@@ -1,0 +1,16 @@
+
+
+services:
+  ethereum:
+    image: ethereum/client-go:latest
+    ports:
+      - "30303:30303" # Expose the JSON-RPC API port
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - ethereum
+    environment:
+      - API_ENDPOINT=http://ethereum:30303 
